@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TelePrEP Brasil — Pesquisa em telessaúde e PrEP</title>
+<meta name="description" content="TelePrEP Brasil é um estudo do Grupo de Pesquisa Clínica em Moléstias Infecciosas do HCFMUSP sobre estratégias de atendimento em telessaúde para profilaxia pré-exposição ao HIV (PrEP).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coral:#EA5F4C;
+    --coral-dark:#D6503F;
+    --blue:#3D6FE3;
+    --blue-light:#7FA3F2;
+    --plum:#7A4FA6;
+    --ink:#211E29;
+    --ink-soft:#4A4651;
+    --muted:#6E6A78;
+    --sand:#FBF6EF;
+    --sand-line:#E6DDD0;
+    --card-line:#EFE7DB;
+    --white:#FFFFFF;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Hanken Grotesk',sans-serif;
+    background:var(--sand);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    line-height:1.5;
+  }
+  h1,h2,h3{font-family:'Outfit',sans-serif;letter-spacing:-.02em;margin:0;}
+  p{margin:0;}
+  a{color:var(--blue);text-decoration:none;}
+  a:hover{color:var(--coral-dark);}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--blue);
+  }
+  section{padding:96px 0;}
+  .section-head{display:flex;align-items:baseline;gap:16px;border-top:1.5px solid var(--sand-line);padding-top:28px;margin-bottom:40px;}
+  .section-head .num{font-family:'Outfit';font-weight:700;font-size:13px;color:var(--blue);letter-spacing:.06em;}
+  .section-head h2{font-size:32px;}
+  .lede{font-size:17px;color:var(--muted);max-width:680px;margin:0 0 32px;text-wrap:pretty;}
+
+  /* ---------- Logo lockup ---------- */
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo svg{flex:none;}
+  .logo .word{display:flex;flex-direction:column;line-height:.8;}
+  .logo .tele{font-family:'Caveat';font-weight:700;color:var(--coral);transform:rotate(-4deg);transform-origin:left;}
+  .logo .prep{font-family:'Outfit';font-weight:800;letter-spacing:-.02em;color:var(--blue);}
+  .logo.on-dark .prep{color:var(--blue-light);}
+
+  /* ---------- Wave-expansion effect ---------- */
+  .wave-logo{position:relative;overflow:visible;}
+  .wave-echo{transform-box:fill-box;transform-origin:50% 100%;opacity:0;animation:waveExpand 2.4s ease-out infinite;}
+  .wave-echo.arc-outer{animation-delay:0s;}
+  .wave-echo.arc-inner{animation-delay:.35s;}
+  .wave-echo.arc-outer-2{animation-delay:1.2s;}
+  .wave-echo.arc-inner-2{animation-delay:1.55s;}
+  @keyframes waveExpand{
+    0%{transform:scale(.5);opacity:.85;}
+    75%{opacity:0;}
+    100%{transform:scale(1.55);opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .wave-echo{animation:none;opacity:0;}
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;background:rgba(251,246,239,.92);
+    backdrop-filter:blur(10px);border-bottom:1px solid transparent;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  header.scrolled{border-color:var(--sand-line);box-shadow:0 4px 20px -12px rgba(33,30,41,.15);}
+  header .bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--max);margin:0 auto;}
+  header .logo .tele{font-size:22px;}
+  header .logo .prep{font-size:19px;}
+  nav{display:flex;align-items:center;gap:28px;}
+  nav a{font-family:'Outfit';font-weight:600;font-size:14.5px;color:var(--ink);}
+  nav a:hover{color:var(--blue);}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:'Outfit';font-weight:700;font-size:14.5px;
+    padding:12px 22px;border-radius:100px;border:none;cursor:pointer;
+    text-decoration:none;transition:transform .15s, box-shadow .15s, background .15s;
+  }
+  .btn-primary{background:var(--coral);color:#fff;box-shadow:0 10px 26px -12px rgba(234,95,76,.55);}
+  .btn-primary:hover{background:var(--coral-dark);transform:translateY(-1px);}
+  .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--sand-line);}
+  .btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+  .nav-toggle span{width:22px;height:2px;background:var(--ink);display:block;border-radius:2px;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:88px 0 72px;}
+  .hero .wrap{display:flex;flex-direction:column;align-items:flex-start;gap:28px;}
+  .hero .logo .tele{font-size:64px;}
+  .hero .logo .prep{font-size:56px;}
+  .hero .logo svg{width:82px;height:70px;}
+  .hero h1{font-size:22px;font-weight:600;color:var(--muted);font-family:'Hanken Grotesk';margin-top:4px;}
+  .hero .headline{font-size:44px;font-weight:700;line-height:1.18;max-width:760px;color:var(--ink);text-wrap:pretty;}
+  .hero .headline strong{color:var(--blue);}
+  .hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+  .hero .meta{font-size:13.5px;color:var(--muted);margin-top:6px;}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:start;}
+  .about-grid p{font-size:17px;line-height:1.65;color:#2C2935;}
+  .about-grid p + p{margin-top:18px;}
+  .info-card{background:#fff;border:1px solid var(--card-line);border-radius:18px;padding:26px 28px;display:flex;flex-direction:column;gap:16px;}
+  .info-row{display:flex;flex-direction:column;gap:3px;}
+  .info-row .label{font-family:'Outfit';font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9A958C;}
+  .info-row .value{font-size:15.5px;color:var(--ink);}
+  .info-row + .info-row{border-top:1px solid #F0E9DE;padding-top:14px;}
+
+  /* ---------- Methodology ---------- */
+  .method-box{background:#fff;border:1px solid var(--card-line);border-radius:20px;padding:40px 44px;}
+  .method-box p{font-size:18px;line-height:1.65;color:#2C2935;max-width:800px;}
+  .method-note{font-size:13.5px;color:var(--muted);margin-top:20px;padding-top:20px;border-top:1px solid #F0E9DE;}
+
+  /* ---------- Team ---------- */
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .team-card{background:#fff;border:1px solid var(--card-line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;}
+  .team-photo{
+    width:100%;aspect-ratio:1/1;background:
+      repeating-linear-gradient(135deg, #F0E9DE 0 10px, #F5EFE5 10px 20px);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .team-photo span{font-family:monospace;font-size:12px;color:#9A958C;letter-spacing:.02em;}
+  .team-info{padding:18px 20px 22px;}
+  .team-name{font-family:'Outfit';font-weight:700;font-size:17px;color:var(--ink);}
+  .team-role{font-size:13.5px;color:var(--muted);margin-top:4px;}
+  .team-card.more{align-items:center;justify-content:center;text-align:center;padding:28px 20px;background:var(--ink);color:#fff;}
+  .team-card.more .team-name{color:#fff;}
+  .team-card.more .team-role{color:#B7B1BE;}
+
+  /* ---------- Partners ---------- */
+  .partners-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:640px;}
+  .partner-card{
+    background:#fff;border:1px solid var(--card-line);border-radius:18px;
+    height:140px;display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  .partner-card .ph{
+    width:100%;height:100%;border-radius:10px;
+    background:repeating-linear-gradient(135deg, #F0E9DE 0 10px, #F5EFE5 10px 20px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  }
+  .partner-card .ph span{font-family:monospace;font-size:11.5px;color:#9A958C;}
+  .partner-card .ph strong{font-family:'Outfit';font-size:14px;color:var(--ink-soft);}
+
+  /* ---------- Onde estamos (mapa) ---------- */
+  .map-layout{display:grid;grid-template-columns:1fr 320px;gap:32px;align-items:start;}
+  .br-map{
+    display:grid;grid-template-columns:1.1fr .8fr .9fr;grid-template-rows:repeat(4,64px);gap:8px;
+    grid-template-areas:
+      "norte norte nordeste"
+      "centro centro nordeste"
+      "centro centro sudeste"
+      "sul sul sudeste";
+  }
+  .region{
+    border-radius:14px;border:1.5px solid var(--card-line);background:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    cursor:pointer;transition:border-color .15s, background .15s, transform .15s;
+    padding:6px;text-align:center;
+  }
+  .region:hover{border-color:var(--blue);transform:translateY(-2px);}
+  .region.active{background:var(--blue);border-color:var(--blue);}
+  .region.active .region-name, .region.active .region-status-dot{color:#fff;}
+  .region-name{font-family:'Outfit';font-weight:700;font-size:13.5px;color:var(--ink);}
+  .region-sub{font-size:11px;color:var(--muted);}
+  .region.active .region-sub{color:#DCE6FC;}
+  .region[data-region="norte"]{grid-area:norte;}
+  .region[data-region="nordeste"]{grid-area:nordeste;}
+  .region[data-region="centro"]{grid-area:centro;}
+  .region[data-region="sudeste"]{grid-area:sudeste;}
+  .region[data-region="sul"]{grid-area:sul;}
+  .map-panel{background:#fff;border:1px solid var(--card-line);border-radius:18px;padding:26px 26px;min-height:296px;display:flex;flex-direction:column;gap:14px;}
+  .map-panel .panel-eyebrow{font-family:'Outfit';font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9A958C;}
+  .map-panel .panel-title{font-family:'Outfit';font-weight:700;font-size:20px;color:var(--ink);}
+  .map-panel .panel-status{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--muted);}
+  .map-panel .panel-status .dot{width:8px;height:8px;border-radius:50%;background:var(--sand-line);flex:none;}
+  .map-panel .panel-status.defined .dot{background:#14804A;}
+  .map-panel .panel-desc{font-size:14.5px;color:var(--muted);line-height:1.5;}
+  @media (max-width: 880px){
+    .map-layout{grid-template-columns:1fr;}
+    .br-map{grid-template-rows:repeat(4,56px);}
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;}
+  .contact-info{display:flex;flex-direction:column;gap:22px;}
+  .contact-item{display:flex;flex-direction:column;gap:4px;}
+  .contact-item .label{font-family:'Outfit';font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9A958C;}
+  .contact-item .value{font-size:18px;color:var(--ink);font-weight:600;}
+  form{background:#fff;border:1px solid var(--card-line);border-radius:20px;padding:32px 36px;display:flex;flex-direction:column;gap:18px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field label{font-family:'Outfit';font-weight:600;font-size:13.5px;color:var(--ink);}
+  .field input, .field textarea{
+    font-family:'Hanken Grotesk';font-size:15px;padding:12px 14px;
+    border:1.5px solid var(--sand-line);border-radius:10px;background:var(--sand);
+    color:var(--ink);resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{outline:none;border-color:var(--blue);background:#fff;}
+  .form-msg{font-size:14px;padding:2px;min-height:20px;}
+  .form-msg.ok{color:#14804A;}
+  .form-msg.err{color:var(--coral-dark);}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink);color:#B7B1BE;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:40px 24px;flex-wrap:wrap;}
+  footer .fine{font-size:12.5px;line-height:1.6;text-align:right;}
+
+  @media (max-width: 880px){
+    section{padding:64px 0;}
+    .about-grid, .contact-grid{grid-template-columns:1fr;gap:32px;}
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+    .hero .headline{font-size:32px;}
+    .hero .logo .tele{font-size:44px;}
+    .hero .logo .prep{font-size:38px;}
+    nav{
+      position:fixed;top:64px;left:0;right:0;background:var(--sand);
+      flex-direction:column;align-items:flex-start;gap:0;
+      border-bottom:1px solid var(--sand-line);
+      max-height:0;overflow:hidden;transition:max-height .25s ease;
+    }
+    nav.open{max-height:400px;}
+    nav a, nav .btn{width:100%;padding:16px 24px;border-bottom:1px solid #F0E9DE;border-radius:0;}
+    .nav-toggle{display:flex;}
+    .partners-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 620px){
+    .team-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="bar">
+    <div class="logo">
+      <svg width="30" height="26" viewBox="0 0 130 110" fill="none"><path d="M20 66 q45 -52 90 0" stroke="#EA5F4C" stroke-width="10" stroke-linecap="round" fill="none"/><path d="M37 80 q28 -30 56 0" stroke="#3D6FE3" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="65" cy="92" r="9" fill="#3D6FE3"/></svg>
+      <div class="word"><span class="tele">Tele</span><span class="prep">PrEP</span></div>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="siteNav">
+      <a href="#sobre">Sobre</a>
+      <a href="#metodologia">Metodologia</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#onde-estamos">Onde estamos</a>
+      <a href="#parceiros">Parceiros</a>
+      <a href="#contato" class="btn btn-primary">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="logo">
+        <svg class="wave-logo" width="82" height="70" viewBox="0 0 130 110" fill="none">
+          <path class="wave-echo arc-outer" d="M20 66 q45 -52 90 0" stroke="#EA5F4C" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path class="wave-echo arc-outer-2" d="M20 66 q45 -52 90 0" stroke="#EA5F4C" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path class="wave-echo arc-inner" d="M37 80 q28 -30 56 0" stroke="#3D6FE3" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path class="wave-echo arc-inner-2" d="M37 80 q28 -30 56 0" stroke="#3D6FE3" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M20 66 q45 -52 90 0" stroke="#EA5F4C" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M37 80 q28 -30 56 0" stroke="#3D6FE3" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <circle cx="65" cy="92" r="8" fill="#3D6FE3"/>
+        </svg>
+        <div class="word"><span class="tele">Tele</span><span class="prep">PrEP</span></div>
+      </div>
+      <p class="headline">Estudando novas formas de levar a <strong>PrEP</strong> até quem precisa <strong>por telessaúde</strong>.</p>
+      <div class="actions">
+        <a href="#contato" class="btn btn-primary">Falar com a equipe</a>
+        <a href="#sobre" class="btn btn-outline">Conhecer a pesquisa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOBRE ============ -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="section-head"><span class="num">01</span><h2>Sobre a pesquisa</h2></div>
+      <div class="about-grid">
+        <div>
+          <p>A <strong>TelePrEP Brasil</strong> é o nome fantasia do estudo <em>"Avaliação da aceitabilidade e do custo-efetividade de estratégias alternativas de atendimento em profilaxia pré-exposição ao HIV"</em>, conduzido pelo Grupo de Pesquisa Clínica em Moléstias Infecciosas (GPCMI) do Hospital das Clínicas da Faculdade de Medicina da USP (HCFMUSP), no âmbito do Programa de Pós-Graduação em Doenças Infecciosas e Saúde Global da FMUSP.</p>
+          <p>A PrEP é uma ferramenta eficaz de prevenção ao HIV, mas seu acesso ainda é limitado pela concentração de serviços especializados em grandes centros urbanos. O estudo investiga formatos alternativos de atendimento — com destaque para a telessaúde — comparando-os ao cuidado presencial tradicional, para entender o que funciona melhor para quem usa o serviço e o que é mais custo-efetivo para o sistema de saúde.</p>
+          <p>A pesquisa tem abrangência nacional, com recrutamento planejado nas cinco regiões do Brasil, em parceria com redes comunitárias e serviços de saúde locais.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-row"><span class="label">Instituição responsável</span><span class="value">HCFM/USP</span></div>
+          <div class="info-row"><span class="label">Grupo de pesquisa</span><span class="value">GPCMI</span></div>
+          <div class="info-row"><span class="label">Financiamento</span><span class="value">Recursos internos do GPCMI/HCFMUSP, sem financiamento externo</span></div>
+          <div class="info-row"><span class="label">Registro (CAAE)</span><span class="value">86108325.7.0000.0068</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ METODOLOGIA ============ -->
+  <section id="metodologia" style="background:#fff;border-top:1px solid var(--card-line);border-bottom:1px solid var(--card-line);">
+    <div class="wrap">
+      <div class="section-head" style="border-top:none;padding-top:0;"><span class="num">02</span><h2>Desenho do estudo</h2></div>
+      <div class="method-box">
+        <p>Em linguagem simples: o estudo tem duas etapas. Na primeira, pessoas de todo o Brasil respondem a um questionário eletrônico anônimo sobre o que facilita ou dificulta o uso da PrEP, incluindo a experiência com diferentes formatos de atendimento. Na segunda, a equipe usa esses dados para comparar o custo-efetividade de estratégias alternativas — como telessaúde e entrega domiciliar de medicamentos — frente ao modelo presencial tradicional.</p>
+        <p style="margin-top:18px;">A participação é voluntária, o questionário é autopreenchido e nenhuma informação de identificação é coletada. O consentimento é obtido de forma eletrônica, conforme aprovação do Comitê de Ética em Pesquisa do HCFMUSP.</p>
+        <div class="method-note">Protocolo completo disponível sob solicitação — fale com a equipe pelos contatos abaixo.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EQUIPE ============ -->
+  <section id="equipe">
+    <div class="wrap">
+      <div class="section-head"><span class="num">03</span><h2>Equipe</h2></div>
+      <p class="lede">Pesquisadores e colaboradores do Grupo de Pesquisa Clínica em Moléstias Infecciosas (GPCMI) do HCFMUSP.</p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo"><span>foto</span></div>
+          <div class="team-info">
+            <div class="team-name">Ricardo Vasconcelos</div>
+            <div class="team-role">Orientador · GPCMI/HCFMUSP</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><span>foto</span></div>
+          <div class="team-info">
+            <div class="team-name">Pedro Henrique</div>
+            <div class="team-role">Pesquisador responsável · GPCMI/HCFMUSP</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><span>foto</span></div>
+          <div class="team-info">
+            <div class="team-name">Daniel Barros</div>
+            <div class="team-role">GPCMI · HCFMUSP</div>
+          </div>
+        </div>
+        <div class="team-card more">
+          <div class="team-name">+ equipe em formação</div>
+          <div class="team-role">Pelo menos 8 novos colaboradores devem se juntar ao time.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ONDE ESTAMOS ============ -->
+  <section id="onde-estamos">
+    <div class="wrap">
+      <div class="section-head"><span class="num">04</span><h2>Onde estamos</h2></div>
+      <p class="lede">A TelePrEP Brasil terá recrutadores em cinco cidades, uma por região do país. As cidades ainda estão sendo definidas — clique em uma região para ver o status.</p>
+      <div class="map-layout">
+        <div class="br-map" id="brMap">
+          <div class="region" data-region="norte"><span class="region-name">Norte</span><span class="region-sub">a definir</span></div>
+          <div class="region" data-region="nordeste"><span class="region-name">Nordeste</span><span class="region-sub">a definir</span></div>
+          <div class="region" data-region="centro"><span class="region-name">Centro-Oeste</span><span class="region-sub">a definir</span></div>
+          <div class="region" data-region="sudeste"><span class="region-name">Sudeste</span><span class="region-sub">a definir</span></div>
+          <div class="region" data-region="sul"><span class="region-name">Sul</span><span class="region-sub">a definir</span></div>
+        </div>
+        <div class="map-panel" id="mapPanel">
+          <span class="panel-eyebrow">Recrutamento por região</span>
+          <span class="panel-title">Selecione uma região</span>
+          <span class="panel-status"><span class="dot"></span>Cidade a definir</span>
+          <p class="panel-desc">Conforme os recrutadores forem confirmados em cada região, esta área será atualizada com a cidade e os canais de contato local.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARCEIROS ============ -->
+  <section id="parceiros" style="background:#fff;border-top:1px solid var(--card-line);border-bottom:1px solid var(--card-line);">
+    <div class="wrap">
+      <div class="section-head" style="border-top:none;padding-top:0;"><span class="num">05</span><h2>Parceiros e apoio institucional</h2></div>
+      <div class="partners-grid">
+        <div class="partner-card"><div class="ph"><strong>GPCMI</strong><span>logo a inserir</span></div></div>
+        <div class="partner-card"><div class="ph"><strong>HCFM/USP</strong><span>logo a inserir</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTATO ============ -->
+  <section id="contato">
+    <div class="wrap">
+      <div class="section-head"><span class="num">06</span><h2>Contato</h2></div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="lede" style="margin-bottom:0;">Para parcerias, divulgação ou dúvidas sobre a pesquisa, fale com a equipe da TelePrEP Brasil.</p>
+          <div class="contact-item">
+            <span class="label">E-mail</span>
+            <a class="value" href="/cdn-cgi/l/email-protection#542031383124263124362635273d38143339353d387a373b39"><span class="__cf_email__" data-cfemail="6e1a0b020b1e1c0b1e0c1c0f1d07022e09030f0702400d0103">[email&#160;protected]</span></a>
+          </div>
+        </div>
+        <form id="contactForm">
+          <!-- Substitua YOUR_FORM_ID pelo endpoint real do Formspree (https://formspree.io) antes de publicar -->
+          <div class="field">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="org">Instituição/Organização</label>
+            <input type="text" id="org" name="org">
+          </div>
+          <div class="field">
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Enviar mensagem</button>
+          <div class="form-msg" id="formMsg" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="logo on-dark" style="gap:8px;">
+      <svg width="24" height="21" viewBox="0 0 130 110" fill="none"><path d="M20 66 q45 -52 90 0" stroke="#EA5F4C" stroke-width="10" stroke-linecap="round" fill="none"/><path d="M37 80 q28 -30 56 0" stroke="#7FA3F2" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="65" cy="92" r="9" fill="#7FA3F2"/></svg>
+      <div class="word"><span class="tele" style="font-size:17px;">Tele</span><span class="prep" style="font-size:15px;">PrEP</span></div>
+    </div>
+    <div class="fine">
+      GPCMI · HCFM/USP · CAAE 86108325.7.0000.0068<br>
+      © <span id="year"></span> TelePrEP Brasil. Todos os direitos reservados.
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Sticky header shadow on scroll
+  var header = document.getElementById('site-header');
+  window.addEventListener('scroll', function(){
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  });
+
+  // Mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var siteNav = document.getElementById('siteNav');
+  navToggle.addEventListener('click', function(){
+    var open = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  siteNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      siteNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Onde estamos — region data (fill in city + status as recruiters are confirmed)
+  var REGIONS = {
+    norte:     { name: 'Norte',        city: null },
+    nordeste:  { name: 'Nordeste',      city: null },
+    centro:    { name: 'Centro-Oeste',  city: null },
+    sudeste:   { name: 'Sudeste',       city: null },
+    sul:       { name: 'Sul',           city: null }
+  };
+  var regionEls = document.querySelectorAll('.region');
+  var panelTitle = document.querySelector('#mapPanel .panel-title');
+  var panelStatus = document.querySelector('#mapPanel .panel-status');
+  var panelDesc = document.querySelector('#mapPanel .panel-desc');
+  regionEls.forEach(function(el){
+    el.addEventListener('click', function(){
+      regionEls.forEach(function(r){ r.classList.remove('active'); });
+      el.classList.add('active');
+      var r = REGIONS[el.dataset.region];
+      panelTitle.textContent = 'Região ' + r.name;
+      if (r.city) {
+        panelStatus.className = 'panel-status defined';
+        panelStatus.innerHTML = '<span class="dot"></span>Recrutador em ' + r.city;
+        panelDesc.textContent = 'Equipe local confirmada em ' + r.city + '.';
+      } else {
+        panelStatus.className = 'panel-status';
+        panelStatus.innerHTML = '<span class="dot"></span>Cidade a definir';
+        panelDesc.textContent = 'Ainda buscando parcerias e recrutador na região ' + r.name + '. Esta área será atualizada assim que houver definição.';
+      }
+    });
+  });
+
+  // Contact form — Formspree (AJAX). Replace YOUR_FORM_ID with your real endpoint.
+  var FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+  var form = document.getElementById('contactForm');
+  var msg = document.getElementById('formMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (FORM_ENDPOINT.indexOf('YOUR_FORM_ID') !== -1) {
+      msg.textContent = 'Formulário ainda não configurado — defina o endpoint do Formspree em index.html.';
+      msg.className = 'form-msg err';
+      return;
+    }
+    var data = new FormData(form);
+    msg.textContent = 'Enviando...';
+    msg.className = 'form-msg';
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res){
+      if (res.ok) {
+        msg.textContent = 'Mensagem enviada — obrigado pelo contato!';
+        msg.className = 'form-msg ok';
+        form.reset();
+      } else {
+        msg.textContent = 'Não foi possível enviar. Tente novamente ou use o e-mail acima.';
+        msg.className = 'form-msg err';
+      }
+    }).catch(function(){
+      msg.textContent = 'Não foi possível enviar. Tente novamente ou use o e-mail acima.';
+      msg.className = 'form-msg err';
+    });
+  });
+</script>
+
+</body>
+</html>
