@@ -95,7 +95,7 @@
     text-decoration:none;transition:transform .15s, box-shadow .15s, background .15s;
   }
   .btn-primary{background:var(--coral);color:#fff;box-shadow:0 10px 26px -12px rgba(234,95,76,.55);}
-  .btn-primary:hover{background:var(--coral-dark);transform:translateY(-1px);}
+  .btn-primary:hover{background:var(--coral-dark);color:#fff;transform:translateY(-1px);}
   .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--sand-line);}
   .btn-outline:hover{border-color:var(--blue);color:var(--blue);}
   .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
@@ -103,7 +103,36 @@
 
   /* ---------- Hero ---------- */
   .hero{padding:88px 0 72px;}
-  .hero .wrap{display:flex;flex-direction:column;align-items:flex-start;gap:28px;}
+  .hero .wrap{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;}
+  .hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:28px;}
+  .filmstrip{display:flex;flex-direction:column;gap:6px;align-items:center;}
+  .filmstrip .frame{
+    position:relative;width:132px;aspect-ratio:1/1;border-radius:4px;overflow:hidden;
+    border:3px solid var(--ink);background:var(--ink);
+  }
+  .filmstrip .frame img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.15) contrast(1.02) brightness(1.02);transition:filter .5s ease, opacity .5s ease;}
+  .filmstrip .frame:hover img{filter:saturate(1.3) contrast(1.12) brightness(.78) blur(1.5px);opacity:.9;}
+  .filmstrip .frame .ripple{
+    position:absolute;left:50%;top:50%;width:55%;height:55%;border-radius:50%;
+    border:3px solid var(--coral);transform:translate(-50%,-50%) scale(.4);opacity:0;
+    pointer-events:none;
+  }
+  .filmstrip .frame .ripple.blue{border-color:var(--blue);}
+  .filmstrip .frame:hover .ripple{animation:frameWave 1.2s ease-out;}
+  .filmstrip .frame:hover .ripple.blue{animation:frameWave 1.2s ease-out .3s;}
+  @keyframes frameWave{
+    0%{transform:translate(-50%,-50%) scale(.35);opacity:.9;}
+    100%{transform:translate(-50%,-50%) scale(2.1);opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .filmstrip .frame:hover .ripple{animation:none;}
+  }
+  .filmstrip .frame::before,.filmstrip .frame::after{
+    content:"";position:absolute;left:0;right:0;height:4px;background:var(--sand);
+    display:flex;justify-content:space-between;
+  }
+  .filmstrip .frame::before{top:0;box-shadow:0 0 0 1px var(--sand) inset;}
+  .filmstrip .frame::after{bottom:0;}
   .hero .logo .tele{font-size:64px;}
   .hero .logo .prep{font-size:56px;}
   .hero .logo svg{width:82px;height:70px;}
@@ -128,6 +157,39 @@
   .method-box p{font-size:18px;line-height:1.65;color:#2C2935;max-width:800px;}
   .method-note{font-size:13.5px;color:var(--muted);margin-top:20px;padding-top:20px;border-top:1px solid #F0E9DE;}
 
+  /* ---------- People mosaic ---------- */
+  .people-card{
+    position:relative;border-radius:14px;overflow:hidden;
+    background:var(--card-line);
+    opacity:0;transform:translateY(22px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .people-card.in-view{opacity:1;transform:translateY(0);}
+  .people-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;filter:saturate(.75) contrast(.96) brightness(1.03);}
+  .people-card:hover img{transform:scale(1.04);}
+  .people-card::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(160deg, rgba(234,95,76,.16), rgba(61,111,227,.22));
+    mix-blend-mode:multiply;pointer-events:none;
+  }
+  .people-card .people-tag{
+    position:absolute;left:10px;bottom:10px;right:10px;
+    font-family:'Outfit';font-weight:600;font-size:12px;color:#fff;
+    background:rgba(33,30,41,.55);backdrop-filter:blur(6px);
+    padding:7px 10px;border-radius:9px;
+    opacity:0;transform:translateY(6px);
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .people-card:hover .people-tag{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .people-card{transition:none;opacity:1;transform:none;}
+    .people-card img{transition:none;}
+  }
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .filmstrip{flex-direction:row;order:1;}
+  }
+
   /* ---------- Team ---------- */
   .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
   .team-card{background:#fff;border:1px solid var(--card-line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;}
@@ -135,6 +197,13 @@
     width:100%;aspect-ratio:1/1;background:
       repeating-linear-gradient(135deg, #F0E9DE 0 10px, #F5EFE5 10px 20px);
     display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .team-photo img{filter:saturate(1.1) contrast(1.02);}
+  .team-photo::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(160deg, rgba(234,95,76,.14), rgba(61,111,227,.18));
+    mix-blend-mode:multiply;pointer-events:none;
   }
   .team-photo span{font-family:monospace;font-size:12px;color:#9A958C;letter-spacing:.02em;}
   .team-info{padding:18px 20px 22px;}
@@ -260,7 +329,7 @@
       <a href="#metodologia">Metodologia</a>
       <a href="#equipe">Equipe</a>
       <a href="#onde-estamos">Onde estamos</a>
-      <a href="#parceiros">Parceiros</a>
+      <a href="#parceiros">Institucional</a>
       <a href="#contato" class="btn btn-primary">Contato</a>
     </nav>
   </div>
@@ -271,6 +340,12 @@
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap">
+    <div class="filmstrip" id="peopleGrid">
+      <div class="frame"><img src="assets/pessoas-1.png" alt="Mulher em ligação na rua, usando o celular" loading="lazy" style="object-position:center 14%;"><span class="ripple"></span><span class="ripple blue"></span></div>
+      <div class="frame"><img src="assets/pessoas-2.png" alt="Homem sorrindo enquanto mexe no celular em casa" loading="lazy" style="object-position:center 22%;"><span class="ripple"></span><span class="ripple blue"></span></div>
+      <div class="frame"><img src="assets/pessoas-3.png" alt="Mulher sentada em um banco de praça, digitando no celular" loading="lazy" style="object-position:center 18%;"><span class="ripple"></span><span class="ripple blue"></span></div>
+    </div>
+    <div class="hero-copy">
       <div class="logo">
         <svg class="wave-logo" width="82" height="70" viewBox="0 0 130 110" fill="none">
           <path class="wave-echo arc-outer" d="M20 66 q45 -52 90 0" stroke="#EA5F4C" stroke-width="9" stroke-linecap="round" fill="none"/>
@@ -289,6 +364,7 @@
         <a href="#sobre" class="btn btn-outline">Conhecer a pesquisa</a>
       </div>
     </div>
+    </div>
   </section>
 
   <!-- ============ SOBRE ============ -->
@@ -297,15 +373,15 @@
       <div class="section-head"><span class="num">01</span><h2>Sobre a pesquisa</h2></div>
       <div class="about-grid">
         <div>
-          <p>A <strong>TelePrEP Brasil</strong> é o nome fantasia do estudo <em>"Avaliação da aceitabilidade e do custo-efetividade de estratégias alternativas de atendimento em profilaxia pré-exposição ao HIV"</em>, conduzido pelo Grupo de Pesquisa Clínica em Moléstias Infecciosas (GPCMI) do Hospital das Clínicas da Faculdade de Medicina da USP (HCFMUSP), no âmbito do Programa de Pós-Graduação em Doenças Infecciosas e Saúde Global da FMUSP.</p>
-          <p>A PrEP é uma ferramenta eficaz de prevenção ao HIV, mas seu acesso ainda é limitado pela concentração de serviços especializados em grandes centros urbanos. O estudo investiga formatos alternativos de atendimento — com destaque para a telessaúde — comparando-os ao cuidado presencial tradicional, para entender o que funciona melhor para quem usa o serviço e o que é mais custo-efetivo para o sistema de saúde.</p>
-          <p>A pesquisa tem abrangência nacional, com recrutamento planejado nas cinco regiões do Brasil, em parceria com redes comunitárias e serviços de saúde locais.</p>
+          <p><b>TelePrEP Brasil</b> é o nome fantasia do estudo "Avaliação da aceitabilidade e do custo-efetividade de estratégias alternativas de atendimento em profilaxia pré-exposição ao HIV", conduzido pelo Grupo de Pesquisa Clínica em Moléstias Infecciosas (GPCMI) do Hospital das Clínicas da Faculdade de Medicina da USP (HCFMUSP), no âmbito do Programa de Pós-Graduação em Doenças Infecciosas e Saúde Global da FMUSP.</p>
+          <p>A PrEP reduz significativamente o risco de infecção por HIV, mas seu acesso permanece limitado pela concentração de serviços especializados em grandes centros urbanos. O estudo investiga formatos alternativos de atendimento, com destaque para a telessaúde, e os compara ao cuidado presencial tradicional, buscando identificar o que funciona melhor para o usuário do serviço e o que apresenta melhor custo-efetividade para o sistema de saúde.</p>
+          <p>A pesquisa tem abrangência nacional, com recrutamento planejado nas cinco regiões do Brasil, em articulação com redes comunitárias e serviços de saúde locais.</p>
         </div>
         <div class="info-card">
-          <div class="info-row"><span class="label">Instituição responsável</span><span class="value">HCFM/USP</span></div>
-          <div class="info-row"><span class="label">Grupo de pesquisa</span><span class="value">GPCMI</span></div>
-          <div class="info-row"><span class="label">Financiamento</span><span class="value">Recursos internos do GPCMI/HCFMUSP, sem financiamento externo</span></div>
-          <div class="info-row"><span class="label">Registro (CAAE)</span><span class="value">86108325.7.0000.0068</span></div>
+          <div class="info-row"><span class="label">NOME OFICIAL</span><span class="value">"Avaliação da aceitabilidade e do custo-efetividade de estratégias alternativas de atendimento em profilaxia pré-exposição ao HIV"</span></div>
+          <div class="info-row"><span class="label">INSTITUIÇÃO</span><span class="value">Grupo de Pesquisa Clínica em Moléstias Infecciosas (GPCMI)<br>Hospital das Clínicas da Faculdade de Medicina da USP (HCFMUSP)</span></div>
+          <div class="info-row"><span class="label">Financiamento</span><span class="value">Recursos próprios</span></div>
+          <div class="info-row"><span class="label">ÉTICA</span><span class="value">CAEE: 86108325.7.0000.0068</span></div>
         </div>
       </div>
     </div>
@@ -316,9 +392,8 @@
     <div class="wrap">
       <div class="section-head" style="border-top:none;padding-top:0;"><span class="num">02</span><h2>Desenho do estudo</h2></div>
       <div class="method-box">
-        <p>Em linguagem simples: o estudo tem duas etapas. Na primeira, pessoas de todo o Brasil respondem a um questionário eletrônico anônimo sobre o que facilita ou dificulta o uso da PrEP, incluindo a experiência com diferentes formatos de atendimento. Na segunda, a equipe usa esses dados para comparar o custo-efetividade de estratégias alternativas — como telessaúde e entrega domiciliar de medicamentos — frente ao modelo presencial tradicional.</p>
-        <p style="margin-top:18px;">A participação é voluntária, o questionário é autopreenchido e nenhuma informação de identificação é coletada. O consentimento é obtido de forma eletrônica, conforme aprovação do Comitê de Ética em Pesquisa do HCFMUSP.</p>
-        <div class="method-note">Protocolo completo disponível sob solicitação — fale com a equipe pelos contatos abaixo.</div>
+        <p>O estudo é composto por duas etapas. Na primeira, pessoas de todo o Brasil respondem a um questionário eletrônico anônimo sobre os fatores que facilitam ou dificultam o uso da PrEP, incluindo a experiência com diferentes formatos de atendimento. Na segunda etapa, os dados coletados são usados para comparar o custo-efetividade de estratégias alternativas, como telessaúde e entrega domiciliar de medicamentos, em relação ao modelo presencial tradicional.</p>
+        <p style="margin-top:18px;">A participação é voluntária, o questionário é autopreenchido e não são coletadas informações de identificação. O consentimento é obtido de forma eletrônica, conforme aprovação do Comitê de Ética em Pesquisa do HCFMUSP.</p>
       </div>
     </div>
   </section>
@@ -327,17 +402,16 @@
   <section id="equipe">
     <div class="wrap">
       <div class="section-head"><span class="num">03</span><h2>Equipe</h2></div>
-      <p class="lede">Pesquisadores e colaboradores do Grupo de Pesquisa Clínica em Moléstias Infecciosas (GPCMI) do HCFMUSP.</p>
       <div class="team-grid">
         <div class="team-card">
-          <div class="team-photo"><span>foto</span></div>
+          <div class="team-photo"><img src="assets/team-rico.png" alt="Ricardo Vasconcelos" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="team-info">
             <div class="team-name">Ricardo Vasconcelos</div>
             <div class="team-role">Orientador · GPCMI/HCFMUSP</div>
           </div>
         </div>
         <div class="team-card">
-          <div class="team-photo"><span>foto</span></div>
+          <div class="team-photo"><img src="assets/team-pedro.png" alt="Pedro Henrique" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="team-info">
             <div class="team-name">Pedro Henrique</div>
             <div class="team-role">Pesquisador responsável · GPCMI/HCFMUSP</div>
@@ -352,7 +426,6 @@
         </div>
         <div class="team-card more">
           <div class="team-name">+ equipe em formação</div>
-          <div class="team-role">Pelo menos 8 novos colaboradores devem se juntar ao time.</div>
         </div>
       </div>
     </div>
@@ -362,7 +435,7 @@
   <section id="onde-estamos">
     <div class="wrap">
       <div class="section-head"><span class="num">04</span><h2>Onde estamos</h2></div>
-      <p class="lede">A TelePrEP Brasil terá recrutadores em cinco cidades, uma por região do país. As cidades ainda estão sendo definidas — clique em uma região para ver o status.</p>
+      <p class="lede">A TelePrEP Brasil terá recrutadores em cinco cidades, uma por região do país. As cidades ainda estão sendo definidas.</p>
       <div class="map-layout">
         <div class="br-map" id="brMap">
           <div class="region" data-region="norte"><span class="region-name">Norte</span><span class="region-sub">a definir</span></div>
@@ -372,10 +445,9 @@
           <div class="region" data-region="sul"><span class="region-name">Sul</span><span class="region-sub">a definir</span></div>
         </div>
         <div class="map-panel" id="mapPanel">
-          <span class="panel-eyebrow">Recrutamento por região</span>
           <span class="panel-title">Selecione uma região</span>
           <span class="panel-status"><span class="dot"></span>Cidade a definir</span>
-          <p class="panel-desc">Conforme os recrutadores forem confirmados em cada região, esta área será atualizada com a cidade e os canais de contato local.</p>
+          <p class="panel-desc">Conforme os recrutadores forem confirmados em cada região, esta área pode ser atualizada com a cidade e os canais de contato local.</p>
         </div>
       </div>
     </div>
@@ -384,10 +456,10 @@
   <!-- ============ PARCEIROS ============ -->
   <section id="parceiros" style="background:#fff;border-top:1px solid var(--card-line);border-bottom:1px solid var(--card-line);">
     <div class="wrap">
-      <div class="section-head" style="border-top:none;padding-top:0;"><span class="num">05</span><h2>Parceiros e apoio institucional</h2></div>
+      <div class="section-head" style="border-top:none;padding-top:0;"><span class="num">05</span><h2>Institucional</h2></div>
       <div class="partners-grid">
-        <div class="partner-card"><div class="ph"><strong>GPCMI</strong><span>logo a inserir</span></div></div>
-        <div class="partner-card"><div class="ph"><strong>HCFM/USP</strong><span>logo a inserir</span></div></div>
+        <div class="partner-card" style="overflow:hidden;"><img src="assets/logo-gpcmi.png" alt="Grupo de Pesquisa Clínica em Moléstias Infecciosas (GPCMI)" style="width:170%;height:170%;object-fit:contain;"></div>
+        <div class="partner-card"><img src="assets/logo-hcfmusp.png" alt="Hospital das Clínicas da Faculdade de Medicina da USP (HCFMUSP)" style="max-width:100%;max-height:100%;object-fit:contain;"></div>
       </div>
     </div>
   </section>
@@ -398,10 +470,10 @@
       <div class="section-head"><span class="num">06</span><h2>Contato</h2></div>
       <div class="contact-grid">
         <div class="contact-info">
-          <p class="lede" style="margin-bottom:0;">Para parcerias, divulgação ou dúvidas sobre a pesquisa, fale com a equipe da TelePrEP Brasil.</p>
+          <p class="lede" style="margin-bottom:0;">Dúvidas sobre a pesquisa? Fale com a equipe da TelePrEP Brasil.</p>
           <div class="contact-item">
             <span class="label">E-mail</span>
-            <a class="value" href="/cdn-cgi/l/email-protection#542031383124263124362635273d38143339353d387a373b39"><span class="__cf_email__" data-cfemail="6e1a0b020b1e1c0b1e0c1c0f1d07022e09030f0702400d0103">[email&#160;protected]</span></a>
+            <a class="value" href="/cdn-cgi/l/email-protection#483c2d242d383a2d382a3a293b2124082f25292124662b2725"><span class="__cf_email__" data-cfemail="dfabbab3baafadbaafbdadbeacb6b39fb8b2beb6b3f1bcb0b2">[email&#160;protected]</span></a>
           </div>
         </div>
         <form id="contactForm">
@@ -431,6 +503,22 @@
 
 </main>
 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  (function(){
+    var cards = document.querySelectorAll('.people-card');
+    if(!cards.length) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, {threshold:.25});
+    cards.forEach(function(c, i){
+      c.style.transitionDelay = (i*0.1)+'s';
+      io.observe(c);
+    });
+  })();
+</script>
+
 <footer>
   <div class="wrap">
     <div class="logo on-dark" style="gap:8px;">
@@ -438,13 +526,13 @@
       <div class="word"><span class="tele" style="font-size:17px;">Tele</span><span class="prep" style="font-size:15px;">PrEP</span></div>
     </div>
     <div class="fine">
-      GPCMI · HCFM/USP · CAAE 86108325.7.0000.0068<br>
+      GPCMI · HCFMUSP<br>
       © <span id="year"></span> TelePrEP Brasil. Todos os direitos reservados.
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Sticky header shadow on scroll
   var header = document.getElementById('site-header');
   window.addEventListener('scroll', function(){
