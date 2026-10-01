@@ -192,7 +192,7 @@
   .participe-steps .step-num{font-family:'Outfit';font-weight:800;font-size:16px;color:var(--coral);flex:none;width:24px;}
   .qr-card{background:var(--coral);border-radius:0;padding:28px 18px;display:flex;flex-direction:column;align-items:center;gap:16px;box-shadow:0 18px 40px -22px rgba(234,95,76,.6);}
   .qr-label{font-family:'Outfit';font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#FBEAE5;text-align:center;line-height:1.5;}
-  .qr-frame{background:#fff;border-radius:12px;padding:14px;}
+  .qr-frame{background:#fff;border-radius:0;padding:14px;}
   .qr-frame img{display:block;width:180px;height:180px;}
   .qr-note{font-size:13px;line-height:1.5;color:#FBEAE5;text-align:center;max-width:200px;}
   @media (max-width:820px){
@@ -277,23 +277,11 @@
   }
 
   /* ---------- Contact ---------- */
-  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;}
   .contact-info{display:flex;flex-direction:column;gap:22px;}
   .contact-item{display:flex;flex-direction:column;gap:4px;}
   .contact-item .label{font-family:'Outfit';font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9A958C;}
-  .contact-item .value{font-size:18px;color:var(--ink);font-weight:600;}
-  form{background:#fff;border:1px solid var(--card-line);border-radius:20px;padding:32px 36px;display:flex;flex-direction:column;gap:18px;}
-  .field{display:flex;flex-direction:column;gap:6px;}
-  .field label{font-family:'Outfit';font-weight:600;font-size:13.5px;color:var(--ink);}
-  .field input, .field textarea{
-    font-family:'Hanken Grotesk';font-size:15px;padding:12px 14px;
-    border:1.5px solid var(--sand-line);border-radius:10px;background:var(--sand);
-    color:var(--ink);resize:vertical;
-  }
-  .field input:focus, .field textarea:focus{outline:none;border-color:var(--blue);background:#fff;}
-  .form-msg{font-size:14px;padding:2px;min-height:20px;}
-  .form-msg.ok{color:#14804A;}
-  .form-msg.err{color:var(--coral-dark);}
+  .contact-item .value{font-size:22px;color:var(--blue);font-weight:700;}
+  .contact-item .value:hover{color:var(--coral-dark);}
 
   /* ---------- Footer ---------- */
   footer{background:var(--ink);color:#B7B1BE;}
@@ -302,7 +290,7 @@
 
   @media (max-width: 880px){
     section{padding:64px 0;}
-    .about-grid, .contact-grid{grid-template-columns:1fr;gap:32px;}
+    .about-grid{grid-template-columns:1fr;gap:32px;}
     .team-grid{grid-template-columns:repeat(2,1fr);}
     .hero .headline{font-size:32px;}
     .hero .logo .tele{font-size:44px;}
@@ -403,18 +391,18 @@
           <p class="participe-desc">Para quem usa, para quem já usou e para quem nunca pensou nisso.</p>
           <span class="participe-eyebrow" style="display:block;margin-top:30px;">Como funciona</span>
           <ol class="participe-steps">
-            <li><span class="step-num">01</span><span>Escaneie o QR code ou clique no botão abaixo.</span></li>
+            <li><span class="step-num">01</span><span>Escaneie o QR code ou clique no botão Participar.</span></li>
             <li><span class="step-num">02</span><span>Responda ao questionário eletrônico.</span></li>
             <li><span class="step-num">03</span><span>Ajude a construir políticas públicas de acesso à PrEP.</span></li>
           </ol>
           <div class="actions" style="margin-top:26px;">
-            <a href="#" id="surveyLink" class="btn btn-primary">Responder o questionário</a>
+            <a href="https://lim60.fm.usp.br/redcap/surveys/?s=MNNTPCAXKKDTY7ND" id="surveyLink" class="btn btn-primary" target="_blank" rel="noopener">Participar</a>
             <a href="#contato" class="btn btn-outline">Falar com a equipe</a>
           </div>
         </div>
         <div class="qr-card">
           <span class="qr-label">Aponte a câmera<br>e participe</span>
-          <div class="qr-frame"><img id="surveyQr" alt="QR code de acesso ao questionário da pesquisa" width="180" height="180"></div>
+          <div class="qr-frame"><a href="https://lim60.fm.usp.br/redcap/surveys/?s=MNNTPCAXKKDTY7ND" target="_blank" rel="noopener"><img id="surveyQr" src="assets/qr-questionario.svg" alt="QR code de acesso ao questionário da pesquisa" width="180" height="180"></a></div>
           <span class="qr-note">O questionário é anônimo e pode ser respondido pelo celular em poucos minutos.</span>
         </div>
       </div>
@@ -460,24 +448,24 @@
       <div class="section-head"><span class="num">03</span><h2>Equipe</h2></div>
       <div class="team-grid">
         <div class="team-card">
-          <div class="team-photo"><img src="assets/team-rico.png" alt="Ricardo Vasconcelos" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="team-photo"><img src="assets/team-rico.webp" alt="Ricardo Vasconcelos" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="team-info">
             <div class="team-name">Ricardo Vasconcelos</div>
-            <div class="team-role">Orientador · GPCMI - HCFMUSP</div>
+            <div class="team-role">Orientador · GPCMI/HCFMUSP</div>
           </div>
         </div>
         <div class="team-card">
-          <div class="team-photo"><img src="assets/team-pedro.png" alt="Pedro Henrique" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="team-photo"><img src="assets/team-pedro.webp" alt="Pedro Henrique" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="team-info">
             <div class="team-name">Pedro Henrique</div>
-            <div class="team-role">Pesquisador responsável · GPCMI - HC FMUSP</div>
+            <div class="team-role">Pesquisador responsável · GPCMI/HCFMUSP</div>
           </div>
         </div>
         <div class="team-card">
-          <div class="team-photo"><span>foto</span></div>
+          <div class="team-photo"><img src="assets/team-daniel.jpg" alt="Daniel Barros" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="team-info">
             <div class="team-name">Daniel Barros</div>
-            <div class="team-role">GPCMI - HC FMUSP</div>
+            <div class="team-role">Assistente de pesquisa · GPCMI/HCFMUSP</div>
           </div>
         </div>
         <div class="team-card more">
@@ -494,16 +482,16 @@
       <p class="lede">A TelePrEP Brasil terá recrutadores em cinco cidades, uma por região do país. As cidades ainda estão sendo definidas.</p>
       <div class="map-layout">
         <div class="br-map" id="brMap">
-          <div class="region" data-region="norte"><span class="region-name">Norte</span><span class="region-sub">a definir</span></div>
-          <div class="region" data-region="nordeste"><span class="region-name">Nordeste</span><span class="region-sub">a definir</span></div>
-          <div class="region" data-region="centro"><span class="region-name">Centro-Oeste</span><span class="region-sub">a definir</span></div>
-          <div class="region" data-region="sudeste"><span class="region-name">Sudeste</span><span class="region-sub">a definir</span></div>
-          <div class="region" data-region="sul"><span class="region-name">Sul</span><span class="region-sub">a definir</span></div>
+          <div class="region" data-region="norte"><span class="region-name">Norte</span><span class="region-sub">em breve</span></div>
+          <div class="region" data-region="nordeste"><span class="region-name">Nordeste</span><span class="region-sub">em breve</span></div>
+          <div class="region" data-region="centro"><span class="region-name">Centro-Oeste</span><span class="region-sub">em breve</span></div>
+          <div class="region" data-region="sudeste"><span class="region-name">Sudeste</span><span class="region-sub">em breve</span></div>
+          <div class="region" data-region="sul"><span class="region-name">Sul</span><span class="region-sub">em breve</span></div>
         </div>
         <div class="map-panel" id="mapPanel">
           <span class="panel-title">Selecione uma região</span>
-          <span class="panel-status"><span class="dot"></span>Cidade a definir</span>
-          <p class="panel-desc">Conforme os recrutadores forem confirmados em cada região, esta área pode ser atualizada com a cidade e os canais de contato local.</p>
+          <span class="panel-status"><span class="dot"></span>Em breve</span>
+          <p class="panel-desc">Conforme os recrutadores forem confirmados em cada região, esta área será atualizada com a cidade e os canais de contato local.</p>
         </div>
       </div>
     </div>
@@ -514,8 +502,8 @@
     <div class="wrap">
       <div class="section-head" style="border-top:none;padding-top:0;"><span class="num">05</span><h2>Institucional</h2></div>
       <div class="partners-grid">
-        <div class="partner-card" style="overflow:hidden;"><img src="assets/logo-gpcmi.png" alt="Grupo de Pesquisa Clínica em Moléstias Infecciosas (GPCMI)" style="width:170%;height:170%;object-fit:contain;"></div>
         <div class="partner-card"><img src="assets/logo-hcfmusp.png" alt="Hospital das Clínicas da Faculdade de Medicina da USP (HCFMUSP)" style="max-width:100%;max-height:100%;object-fit:contain;"></div>
+        <div class="partner-card" style="overflow:hidden;"><img src="assets/logo-gpcmi.png" alt="Grupo de Pesquisa Clínica em Moléstias Infecciosas (GPCMI)" style="width:170%;height:170%;object-fit:contain;"></div>
       </div>
     </div>
   </section>
@@ -524,35 +512,12 @@
   <section id="contato">
     <div class="wrap">
       <div class="section-head"><span class="num">06</span><h2>Contato</h2></div>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p class="lede" style="margin-bottom:0;">Dúvidas sobre a pesquisa? Fale com a equipe da TelePrEP Brasil.</p>
-          <div class="contact-item">
-            <span class="label">E-mail</span>
-            <a class="value" href="mailto:teleprepbrasil@gmail.com">teleprepbrasil@gmail.com</a>
-          </div>
+      <div class="contact-info">
+        <p class="lede" style="margin-bottom:0;">Dúvidas sobre a pesquisa? Escreva para a equipe da TelePrEP Brasil.</p>
+        <div class="contact-item">
+          <span class="label">E-mail</span>
+          <a class="value" href="mailto:teleprepbrasil@gmail.com">teleprepbrasil@gmail.com</a>
         </div>
-        <form id="contactForm">
-          <!-- Substitua YOUR_FORM_ID pelo endpoint real do Formspree (https://formspree.io) antes de publicar -->
-          <div class="field">
-            <label for="name">Nome</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="field">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="field">
-            <label for="org">Instituição/Organização</label>
-            <input type="text" id="org" name="org">
-          </div>
-          <div class="field">
-            <label for="message">Mensagem</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Enviar mensagem</button>
-          <div class="form-msg" id="formMsg" role="status"></div>
-        </form>
       </div>
     </div>
   </section>
@@ -624,52 +589,12 @@
         panelDesc.textContent = 'Equipe local confirmada em ' + r.city + '.';
       } else {
         panelStatus.className = 'panel-status';
-        panelStatus.innerHTML = '<span class="dot"></span>Cidade a definir';
+        panelStatus.innerHTML = '<span class="dot"></span>Em breve';
         panelDesc.textContent = 'Ainda buscando parcerias e recrutador na região ' + r.name + '. Esta área será atualizada assim que houver definição.';
       }
     });
   });
 
-  // Contact form — Formspree (AJAX). Replace YOUR_FORM_ID with your real endpoint.
-  var SURVEY_URL = 'https://exemplo-questionario.com'; // TROCAR pelo link real do questionário
-  (function(){
-    var link = document.getElementById('surveyLink');
-    var qr = document.getElementById('surveyQr');
-    if(link) link.href = SURVEY_URL;
-    if(qr) qr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=360x360&margin=0&data=' + encodeURIComponent(SURVEY_URL);
-  })();
-
-  var FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-  var form = document.getElementById('contactForm');
-  var msg = document.getElementById('formMsg');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if (FORM_ENDPOINT.indexOf('YOUR_FORM_ID') !== -1) {
-      msg.textContent = 'Formulário ainda não configurado — defina o endpoint do Formspree em index.html.';
-      msg.className = 'form-msg err';
-      return;
-    }
-    var data = new FormData(form);
-    msg.textContent = 'Enviando...';
-    msg.className = 'form-msg';
-    fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(function(res){
-      if (res.ok) {
-        msg.textContent = 'Mensagem enviada — obrigado pelo contato!';
-        msg.className = 'form-msg ok';
-        form.reset();
-      } else {
-        msg.textContent = 'Não foi possível enviar. Tente novamente ou use o e-mail acima.';
-        msg.className = 'form-msg err';
-      }
-    }).catch(function(){
-      msg.textContent = 'Não foi possível enviar. Tente novamente ou use o e-mail acima.';
-      msg.className = 'form-msg err';
-    });
-  });
 </script>
 
 </body>
