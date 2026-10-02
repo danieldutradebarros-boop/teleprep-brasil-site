@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="9 12 112 112" width="112" height="112" role="img" aria-label="TelePrEP Brasil">
+  <rect x="9" y="12" width="112" height="112" rx="24" fill="#FBF6EF"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M20 66 q45 -52 90 0" stroke="#EA5F4C" stroke-width="12"/>
+    <path d="M37 80 q28 -30 56 0" stroke="#3D6FE3" stroke-width="12"/>
+  </g>
+  <circle cx="65" cy="92" r="10" fill="#3D6FE3"/>
+</svg>
